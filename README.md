@@ -1,5 +1,9 @@
 # TYPO3 Site Language Redirection
 
+This extension is a copy of the [TYPO3 Site Language Redirection](https://github.com/urbantrout/site-language-redirection) extension.
+As I have added a new feature to disable language redirect for multisite enviroments of TYPO3.
+So this repo is usefull untill author of the base extension merge my change request for [my feature](https://github.com/urbantrout/site-language-redirection/pull/51).
+
 PSR-15 middleware to redirect user to correct site language.
 
 - Language detection is based on HTTP headers (browser language) or IP address.
@@ -13,25 +17,25 @@ If Accept-Language is `en-US,de-AT` it looks for sites with an hreflang of `en-U
 
 ## Installation
 
-Install via Extension Manager or composer.  
+Install via Extension Manager or composer.
 
 `composer require urbantrout/site-language-redirection`
 
 ### Enable IP address based redirects
 
 1. Update the GeoIP2 database file for IP address based redirects via CLI or Scheduler.
-    * **CLI**  
+    * **CLI**
     `./vendor/bin/typo3 sitelanguageredirection:updatedb`
-    * **Scheduler**  
-    Create new task of class **Excute console commands** and set **Schedulable Command** to **sitelanguageredirection:updatedb**  
-    ![Settings of new scheduler task](Documentation/Images/scheduler.png)  
+    * **Scheduler**
+    Create new task of class **Excute console commands** and set **Schedulable Command** to **sitelanguageredirection:updatedb**
+    ![Settings of new scheduler task](Documentation/Images/scheduler.png)
     Use this option to periodically update your database file.
-    
-    This step creates a file under `\TYPO3\CMS\Core\Core\Environment::getVarPath() . '/sitelanguageredirection/'` with all the geolocation information.  
+
+    This step creates a file under `\TYPO3\CMS\Core\Core\Environment::getVarPath() . '/sitelanguageredirection/'` with all the geolocation information.
     **Note:** This does not alter your SQL database.
-2. Update the preferred method in your site configuration in the tab **Site Language Redirection**. Defaults to HTTP headers.  
-![Screenshot of Site Language Redirection tab in site configuration](Documentation/Images/site-config.png)  
-Changing this value to **IP address** updates `config/sites/<sitename>/config.yaml` and adds the following line of code:  
+2. Update the preferred method in your site configuration in the tab **Site Language Redirection**. Defaults to HTTP headers.
+![Screenshot of Site Language Redirection tab in site configuration](Documentation/Images/site-config.png)
+Changing this value to **IP address** updates `config/sites/<sitename>/config.yaml` and adds the following line of code:
 ```yaml
 SiteLanguageRedirectionMethod: 2
 ```
